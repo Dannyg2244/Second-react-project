@@ -1,7 +1,7 @@
 //import logo from './logo.svg';
 //import './App.css';
-import React from "react"
-import { UserProvider } from "./UserContext";
+//import React from "react"
+//import { UserProvider } from "./UserContext";
 //import { useState } from "react";
 //import {Routes, Route} from "react-router-dom"
 //import LogInOutButton from './LogInOutButton';
@@ -45,7 +45,7 @@ function App() {
     <LogInOutButton />
   )
 }*/
-/*
+
 import {
   useState,
   useRef
@@ -119,7 +119,7 @@ function App() {
 } 
  
 export default App; 
-*/
+
 
 /*const data = [
   {
@@ -740,6 +740,9 @@ export default function App() {
   )
 }*/
 
+
+/*
+//creating your own custom hook to create and update user working days
 import { useState, useEffect, useRef } from "react";
 export default function App() {
   const [day, setDay] = useState("Monday");
@@ -779,4 +782,367 @@ function usePrevious(val) {
     ref.current = val;
   }, [val]);
   return ref.current;
+}*/
+/*
+const button = ({children, backgroundColor}) => {
+  return <button style={{backgroundColor}}> {children}</button>
+};
+
+const Alert = ({children}) => {
+ return (
+ <>
+  <div className="Overlay" />
+  <div className="Alert">{children}</div>
+  </>
+ )
 }
+
+const deleteButton = () => {
+  <button style={backgroundColor="red"}>Delete</button>
+}
+export default function App(){
+  return (
+    <div className="App">
+      <header>Little Lemon Restaurant</header>
+      <Alert>
+        <h1>Delete Account</h1>
+        <p>Are you sure you want to proceed with the deletion of account</p>
+        <deleteButton />
+      </Alert>
+    </div>
+  )
+}**/
+
+
+/*
+import React from "react"
+
+const Row = ({children, spacing}) => {
+
+  const childStyle = {
+    marginLeft: `${spacing}px`
+  };
+
+  return (
+    <div className="Row">
+    {React.Children.map(children, [child, index] => {
+      return React.cloneElement(child, {
+        style: {
+          ...child.props.style
+          ...{index > 0 ? childStyle : {}}
+        }
+      })
+    })}
+    </div>
+  )
+}
+
+export default function LiveOrders() {
+  return (
+    <div className="App">
+      <Row spacing={32}>
+        <p>Pizza Magarita</p>
+        <p>2</p>
+        <p>38$</p>
+        <p>18:30</p>
+        <p>John</p>
+      </Row>
+    </div>
+  )
+} */
+/*
+//index.js file
+//import * as React from "react";
+import { useState } from "react";
+export const RadioGroup = ({ onChange, selected, children }) => { 
+ const RadioOptions = React.Children.map(children, (child) => { 
+   return React.cloneElement(child, { 
+     onChange, 
+     checked: child.props.value === selected, 
+   }); 
+ }); 
+ return <div className="RadioGroup">{RadioOptions}</div>; 
+}; 
+ 
+export const RadioOption = ({ value, checked, onChange, children }) => { 
+ return ( 
+   <div className="RadioOption"> 
+     <input 
+       id={value} 
+       type="radio" 
+       name={value} 
+       value={value} 
+       checked={checked} 
+       onChange={(e) => { 
+         onChange(e.target.value); 
+       }} 
+     /> 
+     <label htmlFor={value}>{children}</label> 
+   </div> 
+ ); 
+}; 
+
+//App.js file
+
+//import "./App.css";
+//import { RadioGroup, RadioOption } from "./Radio";
+
+
+function App() {
+  const [selected, setSelected] = useState("");
+  return (
+    <div className="App">
+      <h2>How did you hear about Little Lemon?</h2>
+      <RadioGroup onChange={setSelected} selected={selected}>
+        <RadioOption value="social_media">Social Media</RadioOption>
+        <RadioOption value="friends">Friends</RadioOption>
+        <RadioOption value="advertising">Advertising</RadioOption>
+        <RadioOption value="other">Other</RadioOption>
+      </RadioGroup>
+      <button disabled={!selected}>Submit</button>
+    </div>
+  );
+}
+
+export default App;
+*/
+
+
+/*
+//using Spread operator in React
+
+const Button = ({type, children, ...buttonProps}) => {
+  const className = type === "primary" ? "primaryButton" : "secondaryButton";
+  return ( 
+    <button className={`button ${className}`} {...buttonProps}>
+      {children}
+    </button>
+  )
+}
+
+const LoginButton = ({type, children, ...buttonProps}) => {
+  return (
+    <Button 
+    type="seconday"
+    {...buttonProps}
+    onClick={() => {
+      alert("logging in")
+    }}
+    >
+      {children}
+    </Button>
+  )
+}
+
+function App() {
+  return (
+    <div>
+      <header>Little Lemon Restaurant</header>
+      <Button  
+      type="primary"
+      onClick={() => alert("sign in")}>
+        Sign up
+      </Button>
+      <LoginButton type="secondary"
+      onClick={() => alert("logging in")}>
+        login
+      </LoginButton>
+    </div>
+  )
+}
+*/
+/*
+//Create a HIGHER ORDER COMPONENT for cursor position
+
+import { useState, useEffect } from "react";
+const withMousePosition = (wrappedComponent) => {
+  return (props) => {
+    const [MousePosition, setMousePosition] = useState({
+      x : 0,
+      y : 0,
+    })
+
+    useEffect(() => {
+      const handleMousePositionChange = (e) => {
+        x : e.clientX,
+        y : e.clientY,
+      }
+      window.addEventListener("mousemove", handleMousePositionChange)
+
+      return () => {
+        window.removeEventListener("mousemove", handleMousePositionChange)
+      }
+    }, [])
+    return (
+      <wrappedComponent {...props} MousePosition={MousePosition}/>
+    )
+  }
+}
+
+const PanelMouseLogger = ({MousePosition}) => {
+  if (!MousePosition) {
+    return null
+  }
+  return (
+    <div>
+      <p>Mouse Position</p>
+      <div>
+        <span>x: {MousePosition.x}</span>
+        <span>y: {MousePosition.y}</span>
+      </div>
+    </div>
+  )
+}
+
+const PointMouseLogger = ({MousePosition}) => {
+  if (!MousePosition) {
+    return null
+  }
+  return (
+    <p>
+      {{MousePosition.x}, {MousePosition.y}}
+    </p>
+  )
+}
+
+const PanelMouseTracker = withMousePosition(PanelMouseLogger)
+const PointMouseTracker = withMousePosition(PointMouseLogger)
+
+export default function App(){
+  return (
+    <div>
+      <header>Little Lemon Restaurant</header>
+      <PanelMouseTracker />
+      <PointMouseTracker />
+    </div>
+  )
+}
+*/
+
+/*
+//Using RENDER PROPS
+import React, {useState, useEffect} from "react";
+const DataFetcher = ({render, url}) => {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    if (url.include("dessert")) {
+      setData('cake', 'ice cream', 'pie', 'chocolate')
+    }
+    else {
+      setData('water', 'soda', 'juice')
+    }
+  }, [])
+  return render(data)
+}
+
+const DessertCount = () => {
+  return (
+    <DataFetcher
+    url="https://littlelemon/desserts"
+    render={(data) => <p>{data.length} desserts</p>}
+    />
+  )
+}
+
+const DrinksCount = () => {
+  return (
+    <DataFetcher
+    url="https://littlelemon/drinks"
+    render={(data) => <h3>{data.length} drinks</h3>}
+    />
+  )
+}
+
+export default function App(){
+  return(
+    <div>
+      <header>Little Lemon Restaurant</header>
+      <DessertCount />
+      <DrinksCount />
+    </div>
+  )
+}
+*/
+//what HOC does Render Props do the same thing with same code
+/*
+import React, { useEffect, useState } from "react";
+const MousePosition = ({ render }) => {
+  const [mousePosition, setMousePosition] = useState({
+    x: 0,
+    y: 0,
+  });
+
+  useEffect(() => {
+    const handleMousePositionChange = (e) => {
+      setMousePosition({
+        x: e.clientX,
+        y: e.clientY,
+      });
+    };
+
+    window.addEventListener("mousemove", handleMousePositionChange);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMousePositionChange);
+    };
+  }, []);
+
+  return render({ mousePosition });
+};
+
+const PanelMouseLogger = () => {
+  return (
+    <div className="BasicTracker">
+      <p>Mouse position:</p>
+      <MousePosition
+        render={({ mousePosition }) => (
+          <div className="Row">
+            <span>x: {mousePosition.x}</span>
+            <span>y: {mousePosition.y}</span>
+          </div>
+        )}
+      />
+    </div>
+  );
+};
+
+const PointMouseLogger = () => {
+  return (
+    <MousePosition
+      render={({ mousePosition }) => (
+        <p>
+          ({mousePosition.x}, {mousePosition.y})
+        </p>
+      )}
+    />
+  );
+};
+
+function App() {
+  return (
+    <div className="App">
+      <header className="Header">Little Lemon Restaurant 🍕</header>
+      <PanelMouseLogger />
+      <PointMouseLogger />
+    </div>
+  );
+}
+
+export default App;
+*/
+/*
+import { ChakraProvider } from "@chakra-ui/react";
+import {AlertProvider} from "./context/alertContext"
+import Header from "./components/Header";
+export default function App() {
+  return (
+     <ChakraProvider>
+        <AlertProvider>
+           <main>
+              <Header />
+           </main>
+        </AlertProvider>
+     </ChakraProvider>
+  )
+}
+*/
