@@ -1,4 +1,4 @@
-import {createContext, useContext, useState} from "react";
+/*import {createContext, useContext, useState} from "react";
 
 const AlertContext = createContext(undefined);
 
@@ -25,3 +25,24 @@ export const AlertProvider = ({ children }) => {
 };
 
 export const useAlertContext = () => useContext(AlertContext);
+*/
+import React from "react"
+import { createContext, useContext, useState } from "react";
+const ThemeContext = createContext(undefined);
+
+export const ThemeProvider = ({children}) => {
+    const [theme, setTheme] = useState("light")
+
+    return (
+      <ThemeContext.Provider 
+      value = {{
+        theme,
+        toggleTheme: () => setTheme(theme === "light" ? "dark" : "light")
+      }}
+      >
+        {children}
+      </ThemeContext.Provider>
+    )
+}
+
+export const useUser = () => useContext(ThemeContext)
