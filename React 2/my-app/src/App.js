@@ -1,8 +1,10 @@
 import React from "react";
 import { ChakraProvider, Flex,  } from "@chakra-ui/react";
 import { ThemeProvider, useUser } from "./context/alertContext";
+import Contact from "./components/Contact";
 import Header from "./components/Header";
 import Home from "./components/Home";
+import { Route, Routes, Link } from "react-router-dom";
 import Footer from "./components/Footer";
 const Root = () => {
     const {theme} = useUser()
@@ -13,14 +15,17 @@ const Root = () => {
         }}
         >
             <Header />
+            
             <Home />
             <Footer />
+            
         </div>
     )
 }
 
 function App() {
     return (
+        <>
         <ChakraProvider>
             <ThemeProvider>
             <Flex direction="column" width="100%">
@@ -28,7 +33,10 @@ function App() {
             </Flex>
             </ThemeProvider>
         </ChakraProvider>
+        
+        </>
     )
+    
 }
 
 export default App

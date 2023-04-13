@@ -1,6 +1,6 @@
 import { Submit } from "../hooks/useSubmit";
 import React from "react";
-import { Box, HStack,Text, Flex} from "@chakra-ui/react";
+import { Box, HStack,Text, Flex, Link} from "@chakra-ui/react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import {faArrowDown, } from "@fortawesome/free-solid-svg-icons"
 import {
@@ -10,11 +10,13 @@ import {
     faInstagram, 
     faGithub
 } from "@fortawesome/free-brands-svg-icons"
-import { Route, Routes } from "react-router-dom"
+//import { Route, Routes } from "react-router-dom"
 import Contact from "./Contact";
-import { Link} from "react-router-dom";
+import Home from "./Home";
+import { Route, Routes, Link as RouterLink } from "react-router-dom";
 export default function Header() {
     return (
+        <div>
         <Box
         top={0}
         left={0}
@@ -54,7 +56,7 @@ export default function Header() {
                         <Link to="/portfolio"><Text as="p" fontWeight="semibold" >Portfolios</Text></Link>
                         <Link to="/blog"><Text as="p" fontWeight="semibold" >
                             Blog <FontAwesomeIcon size="xs" icon={faArrowDown} /> </Text></Link>
-                        <Link to="/contact"><Text as="p" fontWeight="semibold" >Contact</Text></Link>
+                        <Link as={RouterLink} to="/contact"><Text as="p" fontWeight="semibold" >Contact</Text></Link>
                         
                         <HStack borderRight="1px solid white" marginLeft="4px">
                             <Text color="black">i</Text>
@@ -83,14 +85,14 @@ export default function Header() {
                         </HStack>
                         
                     </nav>
-                    
-                    <Routes>
-                    <Route exact path="/contact" element={<Contact />} />
-                    </Routes>
-                   
                 </HStack>
+            
             </Box>
-
+            
         </Box>
+        <Routes>
+                <Route path="/contact" element={<Contact />}></Route>
+            </Routes>
+        </div>
     )
 }

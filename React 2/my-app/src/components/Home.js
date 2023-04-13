@@ -65,9 +65,6 @@ export default function Home(){
                         <Text as="p">Daniel Gbenga is a very dedicated person and has a good team spirit. he his willing to work with any organization and to gain more experience in the process</Text>
                         </Box>
                     </HStack>
-                    <Routes>
-                    <Route exact path="/contact" element={<Contact />}  />
-                    </Routes>
                 </Box>
             </Box>
     )
