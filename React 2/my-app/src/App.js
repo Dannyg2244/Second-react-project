@@ -15,10 +15,8 @@ const Root = () => {
         }}
         >
             <Header />
-            
             <Home />
             <Footer />
-            
         </div>
     )
 }
@@ -33,10 +31,8 @@ function App() {
             </Flex>
             </ThemeProvider>
         </ChakraProvider>
-        
         </>
     )
-    
 }
 
 export default App

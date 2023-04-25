@@ -83,12 +83,9 @@ export default function Header() {
                         </Box>
                         </HStack>
                         </HStack>
-                        
                     </nav>
                 </HStack>
-            
             </Box>
-            
         </Box>
         <Routes>
                 <Route path="/contact" element={<Contact />}></Route>
