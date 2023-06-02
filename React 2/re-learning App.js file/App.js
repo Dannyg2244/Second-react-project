@@ -123,7 +123,6 @@ export default function App() {
             email &&
             password.value.length > 8 &&
             role !== "role"
-            
         )
     }
 
@@ -141,7 +140,7 @@ export default function App() {
                     <h1>Sign Up</h1>
                     <div>
                         <label>firstname</label>
-                        <input 
+                        <input
                         type="text"
                         value={firstname}
                         placeholder="firstname"
@@ -159,7 +158,7 @@ export default function App() {
                     </div>
                     <div>
                         <label>email</label>
-                        <input 
+                        <input
                         type="email"
                         value={email}
                         placeholder="email"

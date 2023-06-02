@@ -34,7 +34,7 @@ export const ThemeProvider = ({children}) => {
     const [theme, setTheme] = useState("light")
 
     return (
-      <ThemeContext.Provider 
+      <ThemeContext.Provider
       value = {{
         theme,
         toggleTheme: () => setTheme(theme === "light" ? "dark" : "light")

@@ -1,13 +1,14 @@
 import React from "react";
-import { ChakraProvider, Flex,  } from "@chakra-ui/react";
+import { ChakraProvider, Flex } from "@chakra-ui/react";
 import { ThemeProvider, useUser } from "./context/alertContext";
 import Contact from "./components/Contact";
+import { Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import Home from "./components/Home";
-import { Route, Routes, Link } from "react-router-dom";
+
 import Footer from "./components/Footer";
 const Root = () => {
-    const {theme} = useUser()
+    const { theme } = useUser()
     return (
         <div
         style={{
@@ -27,7 +28,10 @@ function App() {
         <ChakraProvider>
             <ThemeProvider>
             <Flex direction="column" width="100%">
-            <Root />
+            <Routes>
+                <Route path="/" element={<Root />} />
+                <Route path="/contact" element={<Contact />} />
+            </Routes>
             </Flex>
             </ThemeProvider>
         </ChakraProvider>

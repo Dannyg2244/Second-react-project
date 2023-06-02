@@ -1,43 +1,55 @@
-import { Box, FormControl, FormHelperText, FormLabel, Text, VStack } from "@chakra-ui/react"
+import { Box, Button, FormControl, FormHelperText, FormLabel, Text, VStack } from "@chakra-ui/react"
 import {useState} from "react"
 import React from "react"
 
 
 function Contact() {
-    const [fullname, setFullname] = useState("")
-    const [email, setEmail] = useState("")
-    const [feedback, setFeedback] = useState("")
+    const [fullname, setFullname] = useState("");
+    const [email, setEmail] = useState("");
+    const [feedback, setFeedback] = useState("");
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isSubmitted, setIsSubmitted] = useState(false);
 
     const handleErrorMessage = () => {
         return (
-            <p>pls provide a feedback that is 15 character long</p>
+            <p>pls provide a feedback that is more than 15 character long</p>
         )
     }
 
     const isFormValid = () => {
         return(
-        fullname &
-        email &
+        fullname &&
+        email &&
         feedback.length > 15
     )}
 
     const clearForm = () => {
-        setFeedback("")
-        setEmail("")
+        return (
+        setFeedback(""),
+        setEmail(""),
         setFullname("")
+        )
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        clearForm()
-        alert("form submitted")
-    }
+        if (isFormValid()) {
+            setIsSubmitting(true);
+            // Simulate form submission delay
+            setTimeout(() => {
+              setIsSubmitting(false);
+              setIsSubmitted(true);
+              clearForm();
+            }, 30);
+          }
+        };
+
     return (
         <Box
         top={0}
         left={0}
         right={0}
-        bg="gold"
+        bg="gray.600"
         p="10"
         >
             <Box
@@ -53,7 +65,7 @@ function Contact() {
                 >
                     <Box
                     height="20vh"
-                    bg="gold"
+                    bg="gray.600"
                     p="6"
                     >
                         <Text as="h1" fontSize="2xl" fontWeight="800" fontFamily="sans-serif"> 
@@ -87,16 +99,29 @@ function Contact() {
                                 </FormControl>
                                 <FormControl isRequired mb="4">
                                 <FormLabel>Feedback</FormLabel>
-                                <textarea 
-                                type="text" 
+                                <textarea
+                                type="text"
                                 placeholder="Feedback"
                                 value={feedback}
                                 onChange={(e) => setFeedback(e.target.value)}
                                 />
-                                {feedback.length < 15 ? handleErrorMessage() : null}
+                                {feedback.length > 15 ? null  : handleErrorMessage()}
                             </FormControl>
-                            <button type="submit" disabled={!isFormValid()} bg="gold" variant="outline">Submit</button>
-                           
+                            {isSubmitted ? (
+                  <Text color="green.500">Form submitted successfully!</Text>
+                ) : (
+                  <Button
+                    type="submit"
+                    isLoading={isSubmitting}
+                    disabled={!isFormValid() || isSubmitting}
+                    bg="gray.600"
+                    variant="outline"
+                    _hover="black"
+                     border="none"
+                  >
+                    Submit
+                  </Button>
+                )}
                         </form>
                     </Box>
                 </Box>
