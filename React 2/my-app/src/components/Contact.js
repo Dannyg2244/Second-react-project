@@ -40,7 +40,7 @@ function Contact() {
               setIsSubmitting(false);
               setIsSubmitted(true);
               clearForm();
-            }, 30);
+            }, 5);
           }
         };
 
