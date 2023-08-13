@@ -1,3 +1,8 @@
 {
-    "git.ignoreLimitWarning": true
+    "git.ignoreLimitWarning": true,
+    "cSpell.words": [
+        "fortawesome"
+    ],
+    "chatgpt.apiKey": "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",
+    "vs-chatgpt.apikey": "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"
 }
